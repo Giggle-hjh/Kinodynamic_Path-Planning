@@ -4,7 +4,7 @@
 绿色的代表 optimal,因为其cost最小.我在终端输出了不同输入对应下的optimal cost以及其对应的优化变量T的大小:
 ![cost](https://github.com/Giggle-hjh/Kinodynamic_Path-Planning/blob/main/graph/cost.png)
 
-下面是仿真结果, 我使用Arrow来表示设定的终点,结果如下:
+下面是仿真结果, 我使用绿色的Arrow来表示设定的终点,结果如下:
 ![scene1](https://github.com/Giggle-hjh/Kinodynamic_Path-Planning/blob/main/graph/scene1.png)
 ![scene2](https://github.com/Giggle-hjh/Kinodynamic_Path-Planning/blob/main/graph/scene2.png)
 ## Build an ego-graph of the linear modeled robot
@@ -15,7 +15,7 @@
 [Forward integration](https://github.com/Giggle-hjh/Kinodynamic_Path-Planning/blob/main/grid_path_searcher/src/demo_node.cpp#:~:text=for(int%20step%3D0%20%3B%20step%20%3C%3D%20_time_step%20%3B%20step%20%2B%2B))
 
 ## Select the best trajectory closest to the planning target
->这里相当于解决一个OBVP问题,前面forward integration得到的状态在这里作为OBVP的起始点,目标点则作为OBVP的终止点.这里计算的目标函数实际考虑的约束条件只包括了运动学模型,没有考虑障碍物约束,因此这里计算的目标函数本质相当于一种heursitic(non-holonomic-without-obstacles).
+>这里相当于解决一个OBVP问题,前面forward integration得到的状态在这里作为OBVP的起始点,设定的目标点则作为OBVP的终止点.这里计算的目标函数实际考虑的约束条件只包括了运动学模型,没有考虑障碍物约束,因此这里计算的目标函数本质相当于一种heursitic(non-holonomic-without-obstacles).
 
 >最终代码基于的问题是final-state is partially-free的,只给定目标位置,目标点的速度不给定.对于partially-free的final state problem 可以对协态变量使用边界条件来确定在终止时刻的值,进而完成对问题的求解.最终问题可以转换为只关于T的函数,我们需要求取该目标函数的极小值,即可完成对optimal cost的求解.
 
